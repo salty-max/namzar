@@ -1,0 +1,15 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://bfaa8b3hdc14f"]
+
+[ext_resource type="Texture2D" uid="uid://cofm8av5aehx6" path="res://assets/art/inputs.png" id="1_c53s8"]
+
+[resource]
+content_margin_left = 8.0
+content_margin_top = 5.0
+content_margin_right = 7.0
+content_margin_bottom = 7.0
+texture = ExtResource("1_c53s8")
+texture_margin_left = 2.0
+texture_margin_top = 1.0
+texture_margin_right = 1.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(0, 32, 17, 9)
