@@ -4,6 +4,8 @@ extends MarginContainer
 signal animation_started
 signal animation_finished
 
+const TEXT_SCROLL_SOUND := preload("res://assets/audio/text_scroll.wav")
+
 @onready var response: RichTextLabel = %Response
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
@@ -42,8 +44,10 @@ func _start_typewriter(text: String) -> void:
 	animation.length = duration
 	animation.track_set_key_time(0, 1, duration)
 	animation_started.emit()
+	SFXPlayer.play(TEXT_SCROLL_SOUND)
 	animation_player.play("typewriter")
 
 
 func _on_animation_finished(_animation_name: String) -> void:
+	SFXPlayer.stop()
 	animation_finished.emit()
