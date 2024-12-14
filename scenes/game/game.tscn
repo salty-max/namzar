@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjfsr127f4k1m"]
+[gd_scene load_steps=8 format=3 uid="uid://cjfsr127f4k1m"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_efsbg"]
 [ext_resource type="Material" uid="uid://6pwtunr61svp" path="res://resources/shaders/crt.tres" id="2_7dbjk"]
@@ -8,6 +8,8 @@
 font_color = Color(0.803922, 0.839216, 0.956863, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ox5fg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_umoxs"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2gji6"]
 
@@ -19,6 +21,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_efsbg")
+text_animation_speed = 0.013
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -84,14 +87,18 @@ label_settings = SubResource("LabelSettings_2x5tq")
 vertical_alignment = 1
 
 [node name="TextInput" type="LineEdit" parent="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme_override_colors/caret_color = Color(0, 0, 0, 0)
+theme_override_colors/caret_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_colors/font_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_constants/caret_width = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ox5fg")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_umoxs")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2gji6")
-placeholder_text = "Type here"
+caret_blink = true
+caret_force_displayed = true
 script = ExtResource("2_51yfh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
