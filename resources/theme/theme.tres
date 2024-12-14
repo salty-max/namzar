@@ -1,15 +1,22 @@
-[gd_resource type="Theme" load_steps=14 format=3 uid="uid://p0p0cf0acsug"]
+[gd_resource type="Theme" load_steps=15 format=3 uid="uid://p0p0cf0acsug"]
 
 [ext_resource type="StyleBox" uid="uid://rsaymmvbldvd" path="res://resources/theme/button/button_disabled.tres" id="1_83av7"]
 [ext_resource type="StyleBox" uid="uid://bfaa8b3hdc14f" path="res://resources/theme/button/button_normal.tres" id="1_ehp12"]
 [ext_resource type="StyleBox" uid="uid://b2rg3tpaicunx" path="res://resources/theme/button/button_pressed.tres" id="2_2ki3b"]
-[ext_resource type="StyleBox" uid="uid://cunj8c5cqoyap" path="res://resources/theme/panel/panel.tres" id="4_3bsy6"]
-[ext_resource type="StyleBox" uid="uid://b743minxw2mks" path="res://resources/theme/panel_container/panel_container.tres" id="4_4eybu"]
+[ext_resource type="StyleBox" uid="uid://c0l7rscprmlsd" path="res://resources/theme/panel_container/panel_container.tres" id="4_4eybu"]
 [ext_resource type="FontVariation" uid="uid://bux0i1gvsea1d" path="res://resources/theme/direct_message.tres" id="4_ht64s"]
+[ext_resource type="StyleBox" uid="uid://dke0ue5ipdbwe" path="res://resources/theme/panel/panel.tres" id="5_2cajb"]
 [ext_resource type="StyleBox" uid="uid://ckrqux8ew3lle" path="res://resources/theme/tab/tab_selected.tres" id="5_05i3p"]
 [ext_resource type="StyleBox" uid="uid://btt1ng4hk78wk" path="res://resources/theme/tab/tab_hovered.tres" id="5_8f0bn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abmwr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g3c8d"]
+texture_margin_left = 9.0
+texture_margin_top = 9.0
+texture_margin_right = 9.0
+texture_margin_bottom = 9.0
+region_rect = Rect2(128, 32, 32, 32)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_17u5u"]
 content_margin_left = 10.0
@@ -66,7 +73,7 @@ Button/styles/disabled = ExtResource("1_83av7")
 Button/styles/hover = ExtResource("1_ehp12")
 Button/styles/normal = ExtResource("1_ehp12")
 Button/styles/pressed = ExtResource("2_2ki3b")
-Label/colors/font_color = Color(0.709804, 0.709804, 0.709804, 1)
+Label/colors/font_color = Color(0.803922, 0.839216, 0.956863, 1)
 Label/colors/font_outline_color = Color(0, 0, 0, 1)
 Label/colors/font_shadow_color = Color(0, 0, 0, 0)
 Label/constants/line_spacing = 3
@@ -77,7 +84,7 @@ Label/constants/shadow_outline_size = 1
 Label/font_sizes/font_size = 6
 Label/fonts/font = ExtResource("4_ht64s")
 Label/styles/normal = SubResource("StyleBoxEmpty_abmwr")
-Panel/styles/panel = ExtResource("4_3bsy6")
+Panel/styles/panel = ExtResource("5_2cajb")
 PanelContainer/styles/panel = ExtResource("4_4eybu")
 TabContainer/colors/drop_mark_color = Color(1, 1, 1, 1)
 TabContainer/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
@@ -85,7 +92,7 @@ TabContainer/colors/font_hovered_color = Color(0.709804, 0.709804, 0.709804, 1)
 TabContainer/colors/font_outline_color = Color(0, 0, 0, 1)
 TabContainer/colors/font_selected_color = Color(0.709804, 0.709804, 0.709804, 1)
 TabContainer/colors/font_unselected_color = Color(0.509804, 0.509804, 0.509804, 1)
-TabContainer/styles/panel = ExtResource("4_4eybu")
+TabContainer/styles/panel = SubResource("StyleBoxTexture_g3c8d")
 TabContainer/styles/tab_disabled = SubResource("StyleBoxFlat_17u5u")
 TabContainer/styles/tab_focus = SubResource("StyleBoxFlat_cj7r7")
 TabContainer/styles/tab_hovered = ExtResource("5_8f0bn")
