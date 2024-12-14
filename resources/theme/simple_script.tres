@@ -1,0 +1,8 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://chlkn1rxysmwq"]
+
+[ext_resource type="FontFile" uid="uid://domr2tasn4ryr" path="res://assets/font/simple_script.ttf" id="1_kii2u"]
+
+[resource]
+base_font = ExtResource("1_kii2u")
+spacing_top = -3
+spacing_bottom = -13

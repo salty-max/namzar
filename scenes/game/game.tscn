@@ -1,4 +1,13 @@
-[gd_scene format=3 uid="uid://cjfsr127f4k1m"]
+[gd_scene load_steps=5 format=3 uid="uid://cjfsr127f4k1m"]
+
+[ext_resource type="Script" path="res://scripts/input.gd" id="1_w2kku"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2x5tq"]
+font_color = Color(0.803922, 0.839216, 0.956863, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ox5fg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2gji6"]
 
 [node name="Game" type="Control"]
 layout_mode = 3
@@ -34,3 +43,33 @@ size_flags_vertical = 3
 [node name="InputArea" type="Panel" parent="Background/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/Rows/InputArea"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/Rows/InputArea/MarginContainer"]
+layout_mode = 2
+
+[node name="Prompt" type="Label" parent="Background/MarginContainer/Rows/InputArea/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = ">"
+label_settings = SubResource("LabelSettings_2x5tq")
+vertical_alignment = 1
+
+[node name="TextInput" type="LineEdit" parent="Background/MarginContainer/Rows/InputArea/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_colors/caret_color = Color(0, 0, 0, 0)
+theme_override_colors/font_color = Color(0.803922, 0.839216, 0.956863, 1)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ox5fg")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2gji6")
+placeholder_text = "Type here"
+script = ExtResource("1_w2kku")
