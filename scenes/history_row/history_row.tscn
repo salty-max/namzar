@@ -3,16 +3,16 @@
 [ext_resource type="Script" path="res://scenes/history_row/history_row.gd" id="1_0l1j0"]
 
 [node name="HistoryRow" type="MarginContainer"]
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_bottom = 46.0
 grow_horizontal = 2
-grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 8
 theme_override_constants/margin_right = 8
 theme_override_constants/margin_bottom = 8
 script = ExtResource("1_0l1j0")
+animation_speed = 3.0
 
 [node name="Rows" type="VBoxContainer" parent="."]
 layout_mode = 2
@@ -33,7 +33,15 @@ size_flags_horizontal = 3
 theme_override_colors/font_color = Color(0.345098, 0.356863, 0.439216, 1)
 text = "input feedback"
 
-[node name="Response" type="Label" parent="Rows"]
+[node name="Response" type="RichTextLabel" parent="Rows"]
 unique_name_in_owner = true
+clip_contents = false
 layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/table_v_separation = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/line_separation = 0
+bbcode_enabled = true
 text = "Response"
+fit_content = true
+scroll_active = false

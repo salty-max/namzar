@@ -95,7 +95,6 @@ placeholder_text = "Type here"
 script = ExtResource("2_51yfh")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-visible = false
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 material = ExtResource("2_7dbjk")

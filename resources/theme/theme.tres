@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://p0p0cf0acsug"]
+[gd_resource type="Theme" load_steps=17 format=3 uid="uid://p0p0cf0acsug"]
 
 [ext_resource type="StyleBox" uid="uid://rsaymmvbldvd" path="res://resources/theme/button/button_disabled.tres" id="1_83av7"]
 [ext_resource type="StyleBox" uid="uid://bfaa8b3hdc14f" path="res://resources/theme/button/button_normal.tres" id="1_ehp12"]
@@ -10,6 +10,10 @@
 [ext_resource type="StyleBox" uid="uid://btt1ng4hk78wk" path="res://resources/theme/tab/tab_hovered.tres" id="5_8f0bn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_abmwr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hpwev"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kkv2g"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g3c8d"]
 texture_margin_left = 9.0
@@ -86,6 +90,25 @@ Label/fonts/font = ExtResource("4_4tpq1")
 Label/styles/normal = SubResource("StyleBoxEmpty_abmwr")
 Panel/styles/panel = ExtResource("5_2cajb")
 PanelContainer/styles/panel = ExtResource("4_4eybu")
+RichTextLabel/colors/default_color = Color(0.803922, 0.839216, 0.956863, 1)
+RichTextLabel/colors/font_outline_color = Color(0, 0, 0, 1)
+RichTextLabel/colors/font_selected_color = Color(0, 0, 0, 0)
+RichTextLabel/colors/font_shadow_color = Color(0, 0, 0, 0)
+RichTextLabel/colors/selection_color = Color(0.1, 0.1, 1, 0.8)
+RichTextLabel/colors/table_border = Color(0, 0, 0, 0)
+RichTextLabel/colors/table_even_row_bg = Color(0, 0, 0, 0)
+RichTextLabel/colors/table_odd_row_bg = Color(0, 0, 0, 0)
+RichTextLabel/constants/line_separation = 0
+RichTextLabel/constants/outline_size = 0
+RichTextLabel/constants/shadow_offset_x = 1
+RichTextLabel/constants/shadow_offset_y = 1
+RichTextLabel/constants/shadow_outline_size = 1
+RichTextLabel/constants/table_h_separation = 3
+RichTextLabel/constants/table_v_separation = 3
+RichTextLabel/constants/text_highlight_h_padding = 3
+RichTextLabel/constants/text_highlight_v_padding = 3
+RichTextLabel/styles/focus = SubResource("StyleBoxEmpty_hpwev")
+RichTextLabel/styles/normal = SubResource("StyleBoxEmpty_kkv2g")
 TabContainer/colors/drop_mark_color = Color(1, 1, 1, 1)
 TabContainer/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
 TabContainer/colors/font_hovered_color = Color(0.709804, 0.709804, 0.709804, 1)
