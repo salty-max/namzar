@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjfsr127f4k1m"]
+[gd_scene load_steps=7 format=3 uid="uid://cjfsr127f4k1m"]
 
-[ext_resource type="Script" path="res://scripts/input.gd" id="1_w2kku"]
+[ext_resource type="Script" path="res://scenes/game/game.gd" id="1_efsbg"]
+[ext_resource type="Material" uid="uid://6pwtunr61svp" path="res://resources/shaders/crt.tres" id="2_7dbjk"]
+[ext_resource type="Script" path="res://scenes/game/text_input.gd" id="2_51yfh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2x5tq"]
 font_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -16,6 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_efsbg")
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -40,11 +43,28 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="InputArea" type="Panel" parent="Background/MarginContainer/Rows"]
+[node name="Scroll" type="ScrollContainer" parent="Background/MarginContainer/Rows/GameInfo"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="History" type="VBoxContainer" parent="Background/MarginContainer/Rows/GameInfo/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="Prompt" type="Panel" parent="Background/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 24)
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/Rows/InputArea"]
+[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/Rows/Prompt"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -54,16 +74,16 @@ grow_vertical = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/Rows/InputArea/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Background/MarginContainer/Rows/Prompt/MarginContainer"]
 layout_mode = 2
 
-[node name="Prompt" type="Label" parent="Background/MarginContainer/Rows/InputArea/MarginContainer/HBoxContainer"]
+[node name="Caret" type="Label" parent="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer"]
 layout_mode = 2
 text = ">"
 label_settings = SubResource("LabelSettings_2x5tq")
 vertical_alignment = 1
 
-[node name="TextInput" type="LineEdit" parent="Background/MarginContainer/Rows/InputArea/MarginContainer/HBoxContainer"]
+[node name="TextInput" type="LineEdit" parent="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 4
@@ -72,4 +92,20 @@ theme_override_colors/font_color = Color(0.803922, 0.839216, 0.956863, 1)
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ox5fg")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2gji6")
 placeholder_text = "Type here"
-script = ExtResource("1_w2kku")
+script = ExtResource("2_51yfh")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = ExtResource("2_7dbjk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[connection signal="text_submitted" from="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer/TextInput" to="." method="_on_text_input_text_submitted"]
+[connection signal="text_submitted" from="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer/TextInput" to="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer/TextInput" method="_on_text_submitted"]
