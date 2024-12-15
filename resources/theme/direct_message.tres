@@ -1,7 +1,0 @@
-[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://bux0i1gvsea1d"]
-
-[ext_resource type="FontFile" uid="uid://chvmfju60dpdg" path="res://assets/font/direct_message.ttf" id="1_2ygen"]
-
-[resource]
-base_font = ExtResource("1_2ygen")
-spacing_top = -10

@@ -9,6 +9,7 @@ const MUSIC := preload("res://assets/audio/STILES - Ammo Count- 00.mp3")
 @export var text_scroll_speed: float = 1.0
 @export var max_history_length: int = 30
 
+@onready var room_manager: RoomManager = $RoomManager
 @onready var command_parser: CommandParser = $CommandParser
 @onready var history: VBoxContainer = %History
 @onready var scroll: ScrollContainer = %Scroll
@@ -27,7 +28,9 @@ func _ready() -> void:
 		EventBus.text_scroll_started.connect(_on_text_scroll_started)
 		EventBus.text_scroll_finished.connect(_on_text_scroll_finished)
 
-	_create_output('You find yourself in a [color="#f9e2af"]house[/color], with no memory of how you got there. Find a way out.\nYou can type [color="#89b4fa"]help[/color] to see available commands.\n\nGood luck!')
+	_create_output("Welcome to Namzar! Type %s to list available commands" % Palette.colorize("help", Palette.PaletteColor.BLUE))
+	await get_tree().create_timer(2.0).timeout
+	_create_output(command_parser.init(room_manager.get_child(0)))
 
 
 func _process_input(input: String) -> void:
@@ -44,6 +47,7 @@ func _create_output(text: String) -> void:
 	output.text_scroll_speed = text_scroll_speed
 	output.display(text)
 	history.add_child(output)
+	_delete_old_history()
 
 func _create_input_response(input: String, res: String) -> void:
 	var response := INPUT_RESPONSE.instantiate()
@@ -52,6 +56,7 @@ func _create_input_response(input: String, res: String) -> void:
 	response.text_scroll_speed = text_scroll_speed
 	response.set_text(input, res)
 	history.add_child(response)
+	_delete_old_history()
 
 
 func _delete_old_history() -> void:

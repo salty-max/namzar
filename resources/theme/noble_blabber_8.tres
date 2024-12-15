@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://6iufxs5ynhxa"]
+
+[ext_resource type="FontFile" uid="uid://dh8loh5vi6x3v" path="res://assets/font/noble_blabber.ttf" id="1_ac8p5"]
+
+[resource]
+base_font = ExtResource("1_ac8p5")

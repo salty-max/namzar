@@ -1,9 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://cjfsr127f4k1m"]
+[gd_scene load_steps=11 format=3 uid="uid://cjfsr127f4k1m"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_efsbg"]
 [ext_resource type="Material" uid="uid://6pwtunr61svp" path="res://resources/shaders/crt.tres" id="2_7dbjk"]
 [ext_resource type="Script" path="res://scenes/game/text_input.gd" id="2_51yfh"]
 [ext_resource type="Script" path="res://components/command_parser.gd" id="4_iox2a"]
+[ext_resource type="Script" path="res://components/room_manager.gd" id="5_cjabb"]
+[ext_resource type="PackedScene" uid="uid://ydpsca4luyi8" path="res://scenes/room/room.tscn" id="6_lwt2h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2x5tq"]
 font_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -71,7 +73,7 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/separation = 0
+theme_override_constants/separation = 8
 
 [node name="Prompt" type="Panel" parent="Background/MarginContainer/Rows"]
 custom_minimum_size = Vector2(0, 24)
@@ -123,6 +125,30 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
+
+[node name="RoomManager" type="Node2D" parent="."]
+position = Vector2(12, -857)
+script = ExtResource("5_cjabb")
+
+[node name="ShackRoom" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_right = 152.0
+offset_bottom = 180.0
+room_name = "a shack"
+room_description = "You awaken to the creak of aged wood beneath you. The air is sharp and cold, seeping through the cracks of the
+ dilapidated shack that surrounds you. Broken planks hang loosely on the walls, and the faint scent of decay lingers in the air.
+
+You need to find a way out of here."
+
+[node name="OutsideShackRoom" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 176.0
+offset_right = 328.0
+offset_bottom = 336.0
+room_name = "outside the shack"
+room_description = "You step outside into a mist-laden forest, where the air is damp and carries the earthy scent of moss and wet leaves. Twisted trees loom overhead, their bare branches clawing at the pale gray sky. The ground beneath your feet is uneven and littered with broken twigs and patches of overgrown grass.
+
+In the distance, faint rustling hints at unseen movement, and the eerie silence is broken only by the occasional caw of a distant crow. The shack behind you creaks one last time, as if bidding you farewell.
+
+You feel both vulnerable and determined. Whatever lies ahead, it won’t be easy."
 
 [node name="CommandParser" type="Node" parent="."]
 script = ExtResource("4_iox2a")

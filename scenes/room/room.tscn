@@ -1,0 +1,48 @@
+[gd_scene load_steps=4 format=3 uid="uid://ydpsca4luyi8"]
+
+[ext_resource type="Script" path="res://scenes/room/room.gd" id="1_gsajj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fvi1d"]
+bg_color = Color(0.0941176, 0.0941176, 0.145098, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.803922, 0.839216, 0.956863, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_asxst"]
+font_size = 8
+font_color = Color(0.65098, 0.890196, 0.631373, 1)
+
+[node name="Room" type="PanelContainer"]
+offset_right = 86.0
+offset_bottom = 56.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_fvi1d")
+script = ExtResource("1_gsajj")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Rows" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="RoomName" type="Label" parent="MarginContainer/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "<room_name>"
+label_settings = SubResource("LabelSettings_asxst")
+
+[node name="RoomDescription" type="RichTextLabel" parent="MarginContainer/Rows"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/line_separation = 6
+bbcode_enabled = true
+text = "<room_description>"
+fit_content = true
