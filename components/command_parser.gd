@@ -3,6 +3,7 @@ extends Node
 
 const COMMAND_DEFS := {
 	"go": 2,
+	"look": 1,
 	"back": 1,
 	"attack": 4,
 	"help": 1
@@ -30,6 +31,8 @@ func parse_command(input: String) -> String:
 	match cmd:
 		"go":
 			return _go(args)
+		"look":
+			return _look()
 		"help":
 			return _help()
 
@@ -43,29 +46,35 @@ func _go(args: Array) -> String:
 	var dir = args[0]
 
 	if current_room.exits.keys().has(dir):
-		var room_change_string = _change_room(current_room.exits[dir])
+		var exit = current_room.exits[dir]
+		var room_change_string = _change_room(exit.get_next_room(current_room))
 		return "\n\n".join([
 			"You go %s" % Palette.colorize(dir, Palette.PaletteColor.YELLOW),
 			room_change_string
 		])
 
-	return "No exit in that direction"
+	return "No exit in that direction."
+
+
+func _look() -> String:
+	var exits_string = " ".join(current_room.exits.keys())
+	var strings = "\n\n".join([
+		current_room.room_description,
+		"Exits: %s" % Palette.colorize(exits_string, Palette.PaletteColor.YELLOW)
+	])
+
+	return strings
 
 
 func _help() -> String:
 	return "\n".join([
 		"Available commands:",
 		"\t%s <location>" % Palette.colorize("go", Palette.PaletteColor.BLUE),
+		"\t%s" % Palette.colorize("look", Palette.PaletteColor.BLUE),
 		"\t%s" % Palette.colorize("help", Palette.PaletteColor.BLUE)
 	])
 
 
 func _change_room(new_room: Room) -> String:
 	current_room = new_room
-	var exits_string = " ".join(new_room.exits.keys())
-	var strings = "\n\n".join([
-		"You are now in %s." % Palette.colorize(new_room.room_name, Palette.PaletteColor.GREEN),
-		new_room.room_description,
-		"Exits: %s" % Palette.colorize(exits_string, Palette.PaletteColor.YELLOW)
-	])
-	return strings
+	return "You are now in %s." % Palette.colorize(new_room.room_name, Palette.PaletteColor.GREEN)

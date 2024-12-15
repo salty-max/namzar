@@ -16,7 +16,7 @@ const MUSIC := preload("res://assets/audio/STILES - Ammo Count- 00.mp3")
 @onready var scroll_bar: VScrollBar = %Scroll.get_v_scroll_bar()
 @onready var text_input: TextInput = %TextInput
 
-var max_scroll_length := 0
+var max_scroll_length := 0.0
 
 
 func _ready() -> void:

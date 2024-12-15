@@ -33,18 +33,18 @@ func _set_room_description(value: String) -> void:
 
 
 func connect_exit(direction: String, room: Room) -> void:
+	var exit := Exit.new()
+	exit.room_1 = self
+	exit.room_2 = room
+	exits[direction] = exit
 	match direction:
 		"west":
-			exits[direction] = room
-			room.exits["east"] = self
+			room.exits["east"] = exit
 		"east":
-			exits[direction] = room
-			room.exits["west"] = self
+			room.exits["west"] = exit
 		"north":
-			exits[direction] = room
-			room.exits["south"] = self
+			room.exits["south"] = exit
 		"south":
-			exits[direction] = room
-			room.exits["north"] = self
+			room.exits["north"] = exit
 		_:
 			printerr("Failed to connect invalid direction: %s", direction)
