@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 SFXPlayer="*res://scenes/audio/sfx_player.tscn"
+MusicPlayer="*res://scenes/audio/music_player.tscn"
+EventBus="*res://components/event_bus.gd"
 
 [display]
 
@@ -31,6 +33,7 @@ mouse_cursor/custom_image="res://assets/art/cursor.png"
 
 folder_colors={
 "res://assets/": "red",
+"res://components/": "teal",
 "res://resources/": "green",
 "res://scenes/": "blue"
 }

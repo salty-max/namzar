@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjfsr127f4k1m"]
+[gd_scene load_steps=9 format=3 uid="uid://cjfsr127f4k1m"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_efsbg"]
 [ext_resource type="Material" uid="uid://6pwtunr61svp" path="res://resources/shaders/crt.tres" id="2_7dbjk"]
 [ext_resource type="Script" path="res://scenes/game/text_input.gd" id="2_51yfh"]
+[ext_resource type="Script" path="res://components/command_parser.gd" id="4_iox2a"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2x5tq"]
 font_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -21,7 +22,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_efsbg")
-text_animation_speed = 0.013
+text_scroll_speed = 0.013
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -46,17 +47,26 @@ theme_override_constants/separation = 8
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Scroll" type="ScrollContainer" parent="Background/MarginContainer/Rows/GameInfo"]
-unique_name_in_owner = true
+[node name="MarginContainer" type="MarginContainer" parent="Background/MarginContainer/Rows/GameInfo"]
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Scroll" type="ScrollContainer" parent="Background/MarginContainer/Rows/GameInfo/MarginContainer"]
+unique_name_in_owner = true
+clip_contents = false
+layout_mode = 2
 horizontal_scroll_mode = 0
 
-[node name="History" type="VBoxContainer" parent="Background/MarginContainer/Rows/GameInfo/Scroll"]
+[node name="History" type="VBoxContainer" parent="Background/MarginContainer/Rows/GameInfo/MarginContainer/Scroll"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -97,6 +107,7 @@ theme_override_constants/caret_width = 2
 theme_override_styles/focus = SubResource("StyleBoxEmpty_ox5fg")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_umoxs")
 theme_override_styles/normal = SubResource("StyleBoxEmpty_2gji6")
+placeholder_text = "type <help> to get commands"
 caret_blink = true
 caret_force_displayed = true
 script = ExtResource("2_51yfh")
@@ -112,6 +123,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(1, 1, 1, 0)
+
+[node name="CommandParser" type="Node" parent="."]
+script = ExtResource("4_iox2a")
 
 [connection signal="text_submitted" from="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer/TextInput" to="." method="_on_text_input_text_submitted"]
 [connection signal="text_submitted" from="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer/TextInput" to="Background/MarginContainer/Rows/Prompt/MarginContainer/HBoxContainer/TextInput" method="_on_text_submitted"]

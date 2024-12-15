@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://bi6ryv8rmear8"]
+
+[ext_resource type="Script" path="res://scenes/input_response/input_response.gd" id="1_wmp5e"]
+[ext_resource type="PackedScene" uid="uid://bgf3g0la6unwq" path="res://scenes/output/output.tscn" id="2_xgmkm"]
+
+[node name="InputResponse" type="VBoxContainer"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 38.0
+theme_override_constants/separation = 8
+script = ExtResource("1_wmp5e")
+
+[node name="InputFeedback" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Caret" type="Label" parent="InputFeedback"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.345098, 0.356863, 0.439216, 1)
+text = ">"
+
+[node name="Feedback" type="Label" parent="InputFeedback"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.345098, 0.356863, 0.439216, 1)
+text = "input feedback"
+
+[node name="Output" parent="." instance=ExtResource("2_xgmkm")]
+unique_name_in_owner = true
+layout_mode = 2
