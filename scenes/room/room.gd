@@ -9,6 +9,7 @@ extends PanelContainer
 @onready var room_description_label: RichTextLabel = %RoomDescription
 
 @export var exits: Dictionary = {}
+@export var items: Array[Item] = []
 
 
 func _ready() -> void:
@@ -32,6 +33,35 @@ func _set_room_description(value: String) -> void:
 	room_description_label.text = room_description
 
 
+func get_location() -> String:
+	return "You are now in %s." % Palette.to_room(room_name)
+
+
+func get_description() -> String:
+	var description = "\n\n".join([
+		room_description,
+		get_items(),
+		get_exits()
+	])
+
+	return description
+
+
+func get_items() -> String:
+	if items.is_empty():
+		return "No items to pick up."
+
+	var string = ""
+	for item: Item in items:
+		string += "%s " % item.name
+
+	return "Items: %s" % Palette.to_item(string)
+
+
+func get_exits() -> String:
+	return "Exits: %s" % Palette.to_direction(" ".join(exits.keys()))
+
+
 func connect_exit(direction: String, room: Room) -> void:
 	var exit := Exit.new()
 	exit.room_1 = self
@@ -48,3 +78,12 @@ func connect_exit(direction: String, room: Room) -> void:
 			room.exits["north"] = exit
 		_:
 			printerr("Failed to connect invalid direction: %s", direction)
+
+
+func add_item(item: Item) -> void:
+	items.append(item)
+
+
+func remove_item(item) -> void:
+	var index = items.find(item)
+	items.remove_at(index)

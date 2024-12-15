@@ -19,11 +19,11 @@ func init(starting_room: Room) -> String:
 func parse_command(input: String) -> String:
 	var words = input.to_lower().split(" ", false)
 	if words.is_empty():
-		return "Empty command..."
+		return Palette.to_error("Empty command...")
 
 	var cmd: String = words[0]
 	if not COMMAND_DEFS.has(cmd):
-		return "Unknown command: %s" % [cmd]
+		return Palette.to_error("Unknown command: %s" % [cmd])
 
 	var expected_args_count = COMMAND_DEFS[cmd] - 1
 	var args = words.slice(1)
@@ -36,7 +36,7 @@ func parse_command(input: String) -> String:
 		"help":
 			return _help()
 
-	return Palette.colorize("Wololo!", Palette.PaletteColor.RED)
+	return Palette.to_error("Wololo!")
 
 
 func _go(args: Array) -> String:
@@ -49,32 +49,26 @@ func _go(args: Array) -> String:
 		var exit = current_room.exits[dir]
 		var room_change_string = _change_room(exit.get_next_room(current_room))
 		return "\n\n".join([
-			"You go %s" % Palette.colorize(dir, Palette.PaletteColor.YELLOW),
+			"You go %s" % Palette.to_direction(dir),
 			room_change_string
 		])
 
-	return "No exit in that direction."
+	return Palette.to_error("No exit in that direction.")
 
 
 func _look() -> String:
-	var exits_string = " ".join(current_room.exits.keys())
-	var strings = "\n\n".join([
-		current_room.room_description,
-		"Exits: %s" % Palette.colorize(exits_string, Palette.PaletteColor.YELLOW)
-	])
-
-	return strings
+	return current_room.get_description()
 
 
 func _help() -> String:
 	return "\n".join([
 		"Available commands:",
-		"\t%s <location>" % Palette.colorize("go", Palette.PaletteColor.BLUE),
-		"\t%s" % Palette.colorize("look", Palette.PaletteColor.BLUE),
-		"\t%s" % Palette.colorize("help", Palette.PaletteColor.BLUE)
+		"\t%s <location>" % Palette.to_command("go"),
+		"\t%s" % Palette.to_command("look"),
+		"\t%s" % Palette.to_command("help")
 	])
 
 
 func _change_room(new_room: Room) -> String:
 	current_room = new_room
-	return "You are now in %s." % Palette.colorize(new_room.room_name, Palette.PaletteColor.GREEN)
+	return current_room.get_location()

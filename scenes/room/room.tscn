@@ -19,6 +19,7 @@ offset_right = 86.0
 offset_bottom = 56.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fvi1d")
 script = ExtResource("1_gsajj")
+items = null
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -34,7 +35,6 @@ theme_override_constants/separation = 12
 [node name="RoomName" type="Label" parent="MarginContainer/Rows"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "<room_name>"
 label_settings = SubResource("LabelSettings_asxst")
 
 [node name="RoomDescription" type="RichTextLabel" parent="MarginContainer/Rows"]
@@ -44,5 +44,4 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/line_separation = 6
 bbcode_enabled = true
-text = "<room_description>"
 fit_content = true

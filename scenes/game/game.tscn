@@ -24,6 +24,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_efsbg")
+animated_text = false
 text_scroll_speed = 0.013
 
 [node name="Background" type="PanelContainer" parent="."]
@@ -138,6 +139,7 @@ room_description = "You awaken to the creak of aged wood beneath you. The air is
  dilapidated shack that surrounds you. Broken planks hang loosely on the walls, and the faint scent of decay lingers in the air.
 
 You need to find a way out of here."
+items = null
 
 [node name="OutsideShackRoom" parent="RoomManager" instance=ExtResource("6_lwt2h")]
 offset_left = 176.0
@@ -149,6 +151,7 @@ room_description = "You step outside into a mist-laden forest, where the air is 
 In the distance, faint rustling hints at unseen movement, and the eerie silence is broken only by the occasional caw of a distant crow. The shack behind you creaks one last time, as if bidding you farewell.
 
 You feel both vulnerable and determined. Whatever lies ahead, it won’t be easy."
+items = null
 
 [node name="CommandParser" type="Node" parent="."]
 script = ExtResource("4_iox2a")
