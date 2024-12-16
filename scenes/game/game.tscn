@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://cjfsr127f4k1m"]
+[gd_scene load_steps=13 format=3 uid="uid://cjfsr127f4k1m"]
 
 [ext_resource type="Script" path="res://scenes/game/game.gd" id="1_efsbg"]
 [ext_resource type="Material" uid="uid://6pwtunr61svp" path="res://resources/shaders/crt.tres" id="2_7dbjk"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://components/command_parser.gd" id="4_iox2a"]
 [ext_resource type="Script" path="res://components/room_manager.gd" id="5_cjabb"]
 [ext_resource type="PackedScene" uid="uid://ydpsca4luyi8" path="res://scenes/room/room.tscn" id="6_lwt2h"]
+[ext_resource type="Script" path="res://scenes/game/player.gd" id="7_20hv7"]
+[ext_resource type="Resource" uid="uid://b35qbg3xf0eys" path="res://data/player/player_data.tres" id="8_fqsge"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_2x5tq"]
 font_color = Color(0.803922, 0.839216, 0.956863, 1)
@@ -26,6 +28,7 @@ grow_vertical = 2
 script = ExtResource("1_efsbg")
 animated_text = false
 text_scroll_speed = 0.013
+intro_finished = true
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -135,11 +138,9 @@ script = ExtResource("5_cjabb")
 offset_right = 152.0
 offset_bottom = 180.0
 room_name = "a shack"
-room_description = "You awaken to the creak of aged wood beneath you. The air is sharp and cold, seeping through the cracks of the
- dilapidated shack that surrounds you. Broken planks hang loosely on the walls, and the faint scent of decay lingers in the air.
-
-You need to find a way out of here."
+room_description = "The old shack you woke up in."
 items = null
+visited = true
 
 [node name="OutsideShackRoom" parent="RoomManager" instance=ExtResource("6_lwt2h")]
 offset_left = 176.0
@@ -152,6 +153,12 @@ In the distance, faint rustling hints at unseen movement, and the eerie silence 
 
 You feel both vulnerable and determined. Whatever lies ahead, it won’t be easy."
 items = null
+visited = null
+
+[node name="Player" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("7_20hv7")
+data = ExtResource("8_fqsge")
 
 [node name="CommandParser" type="Node" parent="."]
 script = ExtResource("4_iox2a")

@@ -4,16 +4,19 @@ extends Node
 const COMMAND_DEFS := {
 	"go": 2,
 	"look": 1,
-	"back": 1,
-	"attack": 4,
-	"help": 1
+	"take": 2,
+	"drop": 2,
+	"inventory": 1,
+	"help": 1,
 }
+
+@onready var player: Player = %Player
 
 var current_room: Room
 
 
-func init(starting_room: Room) -> String:
-	return _change_room(starting_room)
+func init(starting_room: Room) -> void:
+	current_room = starting_room
 
 
 func parse_command(input: String) -> String:
@@ -25,7 +28,6 @@ func parse_command(input: String) -> String:
 	if not COMMAND_DEFS.has(cmd):
 		return Palette.to_error("Unknown command: %s" % [cmd])
 
-	var expected_args_count = COMMAND_DEFS[cmd] - 1
 	var args = words.slice(1)
 
 	match cmd:
@@ -33,6 +35,12 @@ func parse_command(input: String) -> String:
 			return _go(args)
 		"look":
 			return _look()
+		"take":
+			return _take(args)
+		"drop":
+			return _drop(args)
+		"inventory":
+			return _inventory()
 		"help":
 			return _help()
 
@@ -60,15 +68,62 @@ func _look() -> String:
 	return current_room.get_description()
 
 
+func _take(args: Array) -> String:
+	if args.is_empty():
+		return "Take what?"
+
+	var item_name = " ".join(args)
+
+	for item: Item in current_room.items:
+		if item.name.to_lower() == item_name:
+			player.take_item(item)
+			current_room.remove_item(item)
+			return "You take the %s." % Palette.to_item(item_name)
+
+	return "No %s found." % item_name
+
+
+func _drop(args: Array) -> String:
+	if args.is_empty():
+		return "Drop what?"
+
+	var item_name = " ".join(args)
+
+	for item: Item in player.get_items():
+		if item.name.to_lower() == item_name:
+			player.drop_item(item)
+			current_room.add_item(item)
+			return "You drop the %s." % Palette.to_item(item_name)
+
+	return "No %s in your possession." % item_name
+
+
+func _inventory() -> String:
+	if player.get_items().is_empty():
+		return "You possess nothing at the moment."
+
+	return "".join([
+		"You possess:\n",
+		"\n".join(player.get_items().map(
+			func(item: Item):
+				return "\t- %s" % Palette.to_item(item.name))
+		)
+	])
+
+
 func _help() -> String:
-	return "\n".join([
-		"Available commands:",
-		"\t%s <location>" % Palette.to_command("go"),
-		"\t%s" % Palette.to_command("look"),
-		"\t%s" % Palette.to_command("help")
+	return "".join([
+		"Available commands:\n",
+		"\n".join(COMMAND_DEFS.keys().map(
+			func(key: String):
+				return "\t- %s" % Palette.to_command(key))
+		)
 	])
 
 
 func _change_room(new_room: Room) -> String:
 	current_room = new_room
-	return current_room.get_location()
+	var location = current_room.get_location()
+	if not current_room.visited:
+		current_room.visited = true
+	return location

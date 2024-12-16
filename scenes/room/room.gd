@@ -4,12 +4,12 @@ extends PanelContainer
 
 @export var room_name: String : set = _set_room_name
 @export_multiline var room_description: String: set = _set_room_description
+@export var exits: Dictionary = {}
+@export var items: Array[Item] = []
+@export var visited: bool = false
 
 @onready var room_name_label: Label = %RoomName
 @onready var room_description_label: RichTextLabel = %RoomDescription
-
-@export var exits: Dictionary = {}
-@export var items: Array[Item] = []
 
 
 func _ready() -> void:
@@ -34,7 +34,8 @@ func _set_room_description(value: String) -> void:
 
 
 func get_location() -> String:
-	return "You are now in %s." % Palette.to_room(room_name)
+	var msg = "You are back in %s." if visited else "You are now in %s."
+	return msg % Palette.to_room(room_name)
 
 
 func get_description() -> String:
@@ -51,11 +52,10 @@ func get_items() -> String:
 	if items.is_empty():
 		return "No items to pick up."
 
-	var string = ""
-	for item: Item in items:
-		string += "%s " % item.name
-
-	return "Items: %s" % Palette.to_item(string)
+	return "Items: %s" % ", ".join(items.map(
+		func(item: Item):
+			return Palette.to_item(item.name)
+	))
 
 
 func get_exits() -> String:
@@ -85,5 +85,4 @@ func add_item(item: Item) -> void:
 
 
 func remove_item(item) -> void:
-	var index = items.find(item)
-	items.remove_at(index)
+	items.erase(item)

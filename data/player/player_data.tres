@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="PlayerData" load_steps=3 format=3 uid="uid://b35qbg3xf0eys"]
+
+[ext_resource type="Script" path="res://data/items/item.gd" id="1_u4118"]
+[ext_resource type="Script" path="res://data/player/player_data.gd" id="2_xaubx"]
+
+[resource]
+script = ExtResource("2_xaubx")
+name = &"Player"
+gold = 0
+items = Array[ExtResource("1_u4118")]([])

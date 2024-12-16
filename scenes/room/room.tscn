@@ -20,6 +20,7 @@ offset_bottom = 56.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fvi1d")
 script = ExtResource("1_gsajj")
 items = null
+visited = null
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
