@@ -48,7 +48,6 @@ grow_vertical = 2
 size_flags_vertical = 0
 theme_override_constants/table_v_separation = 0
 theme_override_constants/outline_size = 0
-theme_override_constants/line_separation = 6
 bbcode_enabled = true
 text = "[color=\"#f38ba8\"]Lorem ipsum dolor sit amet[/color], consectetur adipiscing elit. Vestibulum condimentum metus nulla, sit amet facilisis leo egestas ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam lacinia eget risus vitae scelerisque. Duis sagittis congue vehicula."
 fit_content = true

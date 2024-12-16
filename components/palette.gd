@@ -43,3 +43,7 @@ func to_room(text: String) -> String:
 
 func to_item(text: String) -> String:
 	return colorize(text, PaletteColor.MAUVE)
+
+
+func to_character(text: String) -> String:
+	return colorize(text, PaletteColor.ORANGE)

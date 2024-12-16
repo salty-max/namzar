@@ -8,7 +8,6 @@ offset_left = 8.0
 offset_top = 8.0
 offset_right = 632.0
 offset_bottom = 38.0
-theme_override_constants/separation = 8
 script = ExtResource("1_wmp5e")
 
 [node name="InputFeedback" type="HBoxContainer" parent="."]
@@ -29,3 +28,6 @@ text = "input feedback"
 [node name="Output" parent="." instance=ExtResource("2_xgmkm")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 3
+text = "[color=\"#f38ba8\"]Lorem ipsum dolor sit amet[/color], consectetur adipiscing elit. Vestibulum condimentum metus nulla, sit amet facilisis leo ege
+stas ac. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Etiam lacinia eget risus vitae scelerisque. Duis sagittis congue vehicula."

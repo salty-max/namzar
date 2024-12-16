@@ -4,6 +4,7 @@ extends PanelContainer
 
 @export var room_name: String : set = _set_room_name
 @export_multiline var room_description: String: set = _set_room_description
+@export var prefix: String = ""
 @export var exits: Dictionary = {}
 @export var items: Array[Item] = []
 @export var visited: bool = false
@@ -34,13 +35,14 @@ func _set_room_description(value: String) -> void:
 
 
 func get_location() -> String:
-	var msg = "You are back in %s." if visited else "You are now in %s."
-	return msg % Palette.to_room(room_name)
+	var msg = "You are back %s%s." if visited else "You are now %s%s."
+	var location_prefix := "%s " % prefix if not prefix.is_empty() else ""
+	return msg % [location_prefix, Palette.to_room(room_name)]
 
 
 func get_description() -> String:
-	var description = "\n\n".join([
-		room_description,
+	var description = "\n".join([
+		"%s\n" % room_description,
 		get_items(),
 		get_exits()
 	])

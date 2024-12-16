@@ -31,15 +31,13 @@ func _ready() -> void:
 		EventBus.text_scroll_started.connect(_on_text_scroll_started)
 		EventBus.text_scroll_finished.connect(_on_text_scroll_finished)
 
-	_create_output("Welcome to Namzar! Type %s to list available commands" % Palette.colorize("help", Palette.PaletteColor.BLUE))
-	await get_tree().create_timer(2.0).timeout
 	if not intro_finished:
 		start_intro()
 	command_parser.init(room_manager.get_child(0))
 
 
 func start_intro() -> void:
-	_create_output("You wake up lying on the creaky floor of what might generously be called a shack. The walls, made of wood that has clearly lost the will to live, lean at odd angles, letting the cold air poke through every gap. A single broken plank dangles ominously, as if it might fall just to spite you.\nThe smell? Imagine a mix of wet socks and regret.\n\nYour head feels like it is stuffed with dungeon moss, and you can’t quite remember how you got here. Still, priorities first: escape. But before you do anything heroic or foolish, you should probably figure out what to call yourself.\n\nSo… what’s your name?")
+	_create_output("You wake up lying on the creaky floor of what might generously be called a shack. The walls, made of wood that has clearly lost the will to live, lean at odd angles, letting the cold air poke through every gap. A single broken plank dangles ominously, as if it might fall just to spite you.\nThe smell? Imagine a mix of wet socks and regret.\n\nYour head feels like it is stuffed with dungeon moss, and you can’t quite remember how you got here. Still, priorities first: escape. But before you do anything heroic or foolish, you should probably figure out what to call yourself.\n\nSo, what’s your name?")
 
 
 func _process_player_name(input: String) -> void:
@@ -48,7 +46,7 @@ func _process_player_name(input: String) -> void:
 		return
 
 	player.data.name = input
-	_create_input_response(input, "Ok %s, now it is time to get out of here." % input)
+	_create_input_response(input, "Ok %s, now it is time to get out of here." % Palette.to_character(input))
 	intro_finished = true
 
 
