@@ -9,6 +9,6 @@ enum ItemType {
 @export var type: ItemType
 
 
-func init(name: StringName, type: ItemType) -> void:
-	self.name = name
-	self.type = type
+func _init(_name: StringName, _type: ItemType) -> void:
+	self.name = _name
+	self.type = _type

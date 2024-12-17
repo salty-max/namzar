@@ -1,6 +1,8 @@
 class_name Game
 extends Control
 
+signal intro_finished
+
 const OUTPUT := preload("res://scenes/output/output.tscn")
 const INPUT_RESPONSE := preload("res://scenes/input_response/input_response.tscn")
 const MUSIC := preload("res://assets/audio/STILES - Ammo Count- 00.mp3")
@@ -8,7 +10,7 @@ const MUSIC := preload("res://assets/audio/STILES - Ammo Count- 00.mp3")
 @export var animated_text: bool = true
 @export var text_scroll_speed: float = 1.0
 @export var max_history_length: int = 30
-@export var intro_finished: bool = false
+@export var hide_intro: bool = false
 
 @onready var player: Player = %Player
 @onready var room_manager: RoomManager = $RoomManager
@@ -31,13 +33,14 @@ func _ready() -> void:
 		EventBus.text_scroll_started.connect(_on_text_scroll_started)
 		EventBus.text_scroll_finished.connect(_on_text_scroll_finished)
 
-	if not intro_finished:
+	intro_finished.connect(_on_intro_finished)
+
+	if not hide_intro:
 		start_intro()
-	command_parser.init(room_manager.get_child(0))
 
 
 func start_intro() -> void:
-	_create_output("You wake up lying on the creaky floor of what might generously be called a shack. The walls, made of wood that has clearly lost the will to live, lean at odd angles, letting the cold air poke through every gap. A single broken plank dangles ominously, as if it might fall just to spite you.\nThe smell? Imagine a mix of wet socks and regret.\n\nYour head feels like it is stuffed with dungeon moss, and you can’t quite remember how you got here. Still, priorities first: escape. But before you do anything heroic or foolish, you should probably figure out what to call yourself.\n\nSo, what’s your name?")
+	_create_output("Once, you strode boldly into the lair of Namzar the Malevolent, armed with the unshakable confidence of someone who has no idea what they’re doing. It… did not go well.\n\nAnd now, you awaken here. Where is here? A charming little shed held together by hope and splinters. How did you get here? Even I don’t know. But one thing is certain: Namzar is still out there, likely gloating.\n\nWell, let’s not dwell on the past or the embarrassing defeat. What’s your name again?")
 
 
 func _process_player_name(input: String) -> void:
@@ -46,8 +49,8 @@ func _process_player_name(input: String) -> void:
 		return
 
 	player.data.name = input
-	_create_input_response(input, "Ok %s, now it is time to get out of here." % Palette.to_character(input))
-	intro_finished = true
+	_create_input_response(input, "Ah, %s. A name destined for greatness, assuming you can avoid repeating the last fiasco. Now then, let’s figure out how to get you back on your feet, and maybe a bit more prepared this time." % Palette.to_character(input))
+	intro_finished.emit()
 
 
 func _process_input(input: String) -> void:
@@ -84,7 +87,7 @@ func _delete_old_history() -> void:
 
 
 func _on_text_input_text_submitted(new_text: String) -> void:
-	if intro_finished:
+	if hide_intro:
 		_process_input(new_text)
 	else:
 		_process_player_name(new_text)
@@ -93,7 +96,7 @@ func _on_text_input_text_submitted(new_text: String) -> void:
 func _on_scroll_bar_changed() -> void:
 	if max_scroll_length != scroll_bar.max_value:
 		max_scroll_length = scroll_bar.max_value
-		scroll.scroll_vertical = scroll_bar.max_value
+		scroll.scroll_vertical = ceil(scroll_bar.max_value)
 
 
 func _on_text_scroll_started() -> void:
@@ -102,3 +105,10 @@ func _on_text_scroll_started() -> void:
 
 func _on_text_scroll_finished() -> void:
 	text_input.editable = true
+
+
+func _on_intro_finished() -> void:
+	hide_intro = true
+	if animated_text:
+		await get_tree().create_timer(3.0).timeout
+	_create_output(command_parser.init(room_manager.get_child(0)))

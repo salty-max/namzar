@@ -1,12 +1,40 @@
 class_name Exit
 extends Resource
 
-var room_1: Room
-var room_1_locked: bool = false
+var room_a: Room
+var room_b: Room
+var locked: bool = false
+var locked_msg: String
+var key: Item
 
-var room_2: Room
-var room_2_locked: bool = false
+
+func _init(_room_a: Room, _room_b: Room, _locked: bool = false, _key: Item = null, _locked_msg: String = "") -> void:
+	self.room_a = _room_a
+	self.room_b = _room_b
+	self.locked = _locked
+	self.locked_msg = _locked_msg
+	self.key = _key
 
 
-func get_next_room(room: Room) -> Room:
-	return room_1 if room == room_2 else room_2
+func get_next_room(current_room: Room) -> Room:
+	return room_a if current_room == room_b else room_b
+
+
+func is_locked() -> bool:
+	return locked
+
+
+func lock() -> void:
+	locked = true
+
+
+func unlock() -> void:
+	locked = false
+
+
+func get_key() -> Item:
+	return key
+
+
+func get_locked_message() -> String:
+	return locked_msg

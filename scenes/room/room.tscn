@@ -11,12 +11,12 @@ border_width_bottom = 1
 border_color = Color(0.803922, 0.839216, 0.956863, 1)
 
 [node name="Room" type="PanelContainer"]
-custom_minimum_size = Vector2(200, 0)
-offset_right = 86.0
-offset_bottom = 56.0
+custom_minimum_size = Vector2(200, 100)
+offset_right = 84.0
+offset_bottom = 32.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_fvi1d")
 script = ExtResource("1_gsajj")
-prefix = null
+room_search = null
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -27,7 +27,7 @@ theme_override_constants/margin_bottom = 8
 
 [node name="Rows" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-theme_override_constants/separation = 12
+theme_override_constants/separation = 8
 
 [node name="RoomName" type="Label" parent="MarginContainer/Rows"]
 unique_name_in_owner = true
@@ -36,9 +36,7 @@ theme_override_colors/font_color = Color(0.65098, 0.890196, 0.631373, 1)
 
 [node name="RoomDescription" type="RichTextLabel" parent="MarginContainer/Rows"]
 unique_name_in_owner = true
-clip_contents = false
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
 bbcode_enabled = true
 fit_content = true

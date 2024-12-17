@@ -25,7 +25,6 @@ grow_vertical = 2
 script = ExtResource("1_efsbg")
 animated_text = false
 text_scroll_speed = 0.03
-intro_finished = true
 
 [node name="Background" type="PanelContainer" parent="."]
 layout_mode = 1
@@ -127,25 +126,94 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="RoomManager" type="Node2D" parent="."]
-position = Vector2(12, -857)
+position = Vector2(0, -300)
 script = ExtResource("5_cjabb")
 
-[node name="ShackRoom" parent="RoomManager" instance=ExtResource("6_lwt2h")]
-offset_right = 152.0
-offset_bottom = 180.0
-room_name = "a shack"
-room_description = "The derelict shack you woke up in."
+[node name="Shed" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 873.0
+offset_top = -5.0
+offset_right = 1073.0
+offset_bottom = 165.0
+room_name = "a shed"
+room_description = "The shed is small and barely holding together. Dust motes dance in the sunlight, and cobwebs cling to the corners. A door leading [color=\"#f9e2af\"]outside[/color] creaks ominously with every gust of wind."
+room_search = "You look around and notice the [color=\"#cba6f7\"]shed key[/color] on a shelf."
 prefix = "in"
-visited = true
 
-[node name="OutsideShackRoom" parent="RoomManager" instance=ExtResource("6_lwt2h")]
-offset_left = 214.0
-offset_right = 414.0
-offset_bottom = 410.0
-room_name = "outside the shack"
-room_description = "The air is damp and carries the earthy scent of moss and wet leaves. Twisted trees loom overhead, their bare branches clawing at the pale gray sky. The ground beneath your feet is uneven and littered with broken twigs and patches of overgrown grass.
+[node name="BackOfTheTavern" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 630.0
+offset_top = -14.0
+offset_right = 830.0
+offset_bottom = 154.0
+room_name = "the back of the tavern"
+room_description = "Judging by the mountain of empty kegs surrounding a door to the [color=\"#f9e2af\"]north[/color], you seem to be in the back of a tavern.  There is also a [color=\"#f9e2af\"]path[/color] leading to what ressembles a small village.
+You can still return [color=\"#f9e2af\"]inside[/color] the shed and brood about your cunning defeat against Namzar."
+prefix = "in"
 
-In the distance, faint rustling hints at unseen movement, and the eerie silence is broken only by the occasional caw of a distant crow. The shack behind you creaks one last time, as if bidding you farewell."
+[node name="Mudborough" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 397.0
+offset_top = -703.0
+offset_right = 597.0
+offset_bottom = -321.0
+room_name = "Mudborough"
+room_description = "The muddy village looks like it was built as an afterthought. Crooked shacks and a rickety forge surround a puddle large enough to deserve its own name. A faded sign reads: “Welcome to Mudborough – Famous for… Something.” Chickens wander freely, seemingly in charge, while the villagers busy themselves with surviving another day.
+
+A [color=\"#f9e2af\"]path[/color] is leading to the back of the tavern. Judging by its sign it is called The Soggy Boot. You can go [color=\"#f9e2af\"]inside[/color] as it seems opened. A field is visible to the [color=\"#f9e2af\"]west[/color] and the town gate to the [color=\"#f9e2af\"]north[/color]."
+prefix = "in"
+
+[node name="SoggyBoot" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 624.0
+offset_top = -732.0
+offset_right = 824.0
+offset_bottom = -284.0
+room_name = "the Soggy Boot"
+room_description = "It is a lopsided tavern that smells faintly of spilled ale, damp wood, and regret. Its uneven floors creak underfoot, and the walls are decorated with faded banners that may once have been impressive. A warped wooden sign above the bar reads: “No Fighting (Unless Entertaining).” A few villagers nurse their drinks in silence, while Old Bert, the tavern’s most loyal patron, spins tales of his so-called glory days to anyone who’ll listen.
+
+You can feel the moist air coming from [color=\"#f9e2af\"]outside[/color]. To the [color=\"#f9e2af\"]south[/color] there is a door with a sign on which you can read:
+
+\"Private. Trespassers will be cooked\""
+prefix = "at"
+
+[node name="Kitchen" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 626.0
+offset_top = -253.0
+offset_right = 826.0
+offset_bottom = -37.0
+room_name = "a kitchen"
+room_description = "This is a nondescript kitchen. The cook is nowhere to be found - the room is empty but a stew is cooking over the hearth.
+
+There is a door on the [color=\"#f9e2af\"]south[/color] wall that seems to go outside and to the [color=\"#f9e2af\"]north[/color] a door seems to lead back to the tavern proper."
+room_search = "Next to the door leading outside, the [color=\"#cba6f7\"]kitchen key[/color] is hanging on a nail."
+prefix = "in"
+
+[node name="Field" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 164.0
+offset_top = -704.0
+offset_right = 364.0
+offset_bottom = -600.0
+room_name = "a field"
+room_description = "A field of grass and flowers next to the village.
+
+To the [color=\"#f9e2af\"]east[/color] is Mudborough."
+prefix = "in"
+
+[node name="TownGate" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 398.0
+offset_top = -865.0
+offset_right = 598.0
+offset_bottom = -745.0
+room_name = "the town gate"
+room_description = "A guard stands nearby watching everyone who comes by. Past the cobblestone [color=\"#f9e2af\"]gate[/color] lies a [color=\"#f9e2af\"]forest[/color]."
+prefix = "at"
+
+[node name="Forest" parent="RoomManager" instance=ExtResource("6_lwt2h")]
+offset_left = 397.0
+offset_top = -1013.0
+offset_right = 597.0
+offset_bottom = -893.0
+room_name = "a forest"
+room_description = "The forest outside the village. You've made it out of the muddy village.
+The town gate is [color=\"#f9e2af\"]south[/color] of your position."
+prefix = "in"
 
 [node name="Player" type="Node" parent="."]
 unique_name_in_owner = true
